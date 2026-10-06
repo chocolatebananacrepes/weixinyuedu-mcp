@@ -3,6 +3,7 @@ FROM node:20
 
 # 全局安装依赖，提前装好避免运行时下载失败
 RUN npm install -g supergateway weread-mcp@latest
+RUN sed -i 's/respondError(id, -32000, e.message)/respondError(req.id, -32000, e.message)/' /usr/local/lib/node_modules/weread-mcp/server.js
 
 # 启动命令：
 # --host 0.0.0.0 监听所有地址，允许外部访问
